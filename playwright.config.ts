@@ -14,12 +14,12 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests/specs",
   fullyParallel: true,
-  retries: 1,
-  workers: 3,
+  workers: process.env.CI ? 2 : undefined, // Reduce workers in CI
+  retries: process.env.CI ? 1 : 0, // Retry once in CI
   reporter: "html",
   use: {
-    baseURL: "https://www.saucedemo.com",
-    trace: "on-first-retry",
+    baseURL: process.env.BASE_URL || "https://www.saucedemo.com",
+    trace: process.env.CI ? "on-first-retry" : "on",
     screenshot: "only-on-failure",
   },
 
