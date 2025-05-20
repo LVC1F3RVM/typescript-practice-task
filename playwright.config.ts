@@ -12,14 +12,15 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./tests",
+  testDir: "./tests/specs",
   fullyParallel: true,
-  retries: 2,
+  retries: 1,
   workers: 3,
   reporter: "html",
   use: {
-    baseURL: "https://www.saucedemo.com", // Base URL for tests
-    trace: "on-first-retry", // Record traces on failures
+    baseURL: "https://www.saucedemo.com",
+    trace: "on-first-retry",
+    screenshot: "only-on-failure",
   },
 
   /* Configure projects for major browsers */
